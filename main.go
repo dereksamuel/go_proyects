@@ -7,11 +7,31 @@ import (
 	"strconv"
 )
 
+type calc struct {
+}
+
+func (calc) add(x float64, y float64) float64 {
+	return x + y
+}
+
+func (calc) substract(x float64, y float64) float64 {
+	return x - y
+}
+
+func (calc) multiply(x float64, y float64) float64 {
+	return x * y
+}
+
+func (calc) divide(x float64, y float64) float64 {
+	return x / y
+}
+
 func main() {
 	loopCount := 0
 	result := 0.0
 	fmt.Println("Hello, Welcome!")
 	function := ""
+	calculator := calc{}
 	for {
 		if loopCount == 0 {
 			number, _ := getNumber()
@@ -20,13 +40,13 @@ func main() {
 			number, _ := getNumber()
 			switch function {
 			case "+":
-				result = add(result, number)
+				result = calculator.add(result, number)
 			case "-":
-				result = substract(result, number)
+				result = calculator.substract(result, number)
 			case "*":
-				result = multiply(result, number)
+				result = calculator.multiply(result, number)
 			case "/":
-				result = divide(result, number)
+				result = calculator.divide(result, number)
 			default:
 				break
 			}
@@ -50,20 +70,4 @@ func getNumber() (float64, error) {
 	scannerNumber := bufio.NewScanner(os.Stdin)
 	scannerNumber.Scan()
 	return strconv.ParseFloat(scannerNumber.Text(), 64)
-}
-
-func add(x float64, y float64) float64 {
-	return x + y
-}
-
-func substract(x float64, y float64) float64 {
-	return x - y
-}
-
-func multiply(x float64, y float64) float64 {
-	return x * y
-}
-
-func divide(x float64, y float64) float64 {
-	return x / y
 }
