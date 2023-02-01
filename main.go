@@ -14,29 +14,28 @@ func main() {
 	function := ""
 	for {
 		if loopCount == 0 {
-			number, _ := getNumber(loopCount)
+			number, _ := getNumber()
 			result = number
 		} else if loopCount%2 == 0 {
-			number, _ := getNumber(loopCount)
+			number, _ := getNumber()
 			switch function {
-			case "1":
+			case "+":
 				result = add(result, number)
-			case "2":
-				result = multiply(result, number)
-			case "3":
+			case "-":
 				result = substract(result, number)
-			case "4":
+			case "*":
+				result = multiply(result, number)
+			case "/":
 				result = divide(result, number)
 			default:
 				break
 			}
 		} else {
-			fmt.Println("Write your function please(add = 1, substract = 2, multiply = 3, divide = 4 or done = 0)")
+			fmt.Println("Write your function please(add = +, substract = -, multiply = *, divide = / or done = 0)")
 			scannerFunction := bufio.NewScanner(os.Stdin)
 			scannerFunction.Scan()
 			function = scannerFunction.Text()
 			if function == "0" {
-				// time.Sleep(2 * time.Second)
 				break
 			}
 		}
@@ -46,8 +45,8 @@ func main() {
 	fmt.Println("[result]:", result)
 }
 
-func getNumber(loopCount int) (float64, error) {
-	fmt.Println("Write your NUMBER", loopCount, "please")
+func getNumber() (float64, error) {
+	fmt.Println("Write your NUMBER please")
 	scannerNumber := bufio.NewScanner(os.Stdin)
 	scannerNumber.Scan()
 	return strconv.ParseFloat(scannerNumber.Text(), 64)
