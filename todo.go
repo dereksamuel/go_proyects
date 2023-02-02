@@ -78,4 +78,31 @@ func main() {
 
 	// fmt.Printf("%+v\n", list)
 	// fmt.Printf("%+v\n", t) // vamos a mostrar interface key value: %+v
+
+	todoMaps := make(map[string]*todoList)
+	todoMaps["Derek"] = list
+
+	t4 := &todo{
+		name:        "Done Go's course GOOGLE",
+		description: "Done this course on this weekend",
+	} /* apuntamos a la referencia no a una copia */
+	t5 := &todo{
+		name:        "DK artist notebook buy APPLE",
+		description: "Go to DollarCity",
+	}
+	t6 := &todo{
+		name:        "To complete work space SUBSTANCE",
+		description: "doh",
+		done:        true,
+	}
+
+	list2 := &todoList{
+		todos: []*todo{
+			t4, t5, t6,
+		},
+	}
+
+	todoMaps["Hector"] = list2
+
+	todoMaps["Hector"].printDoneTodos()
 }
