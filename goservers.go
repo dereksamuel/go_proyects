@@ -17,13 +17,25 @@ func main() {
 		"http://instagram.com",
 	}
 
-	for _, server := range servers {
-		go checkServerGo(server, channel)
+	var i int
+
+	for {
+		if i >= len(servers)*2 {
+			break
+		}
+
+		for _, server := range servers {
+			go checkServerGo(server, channel)
+		}
+
+		time.Sleep(1 * time.Second)
+		fmt.Println(<-channel)
+		i++
 	}
 
-	for i := 0; i < len(servers); i++ {
-		fmt.Println(<-channel)
-	} // va a esperar a que todos los goroutines terminen
+	// for i := 0; i < len(servers); i++ {
+	// 	fmt.Println(<-channel)
+	// } // va a esperar a que todos los goroutines terminen
 	finished := time.Since(started)
 
 	fmt.Printf("Current time is: %s\n", finished)
